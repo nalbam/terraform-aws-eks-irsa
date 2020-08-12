@@ -1,8 +1,9 @@
 # iam role
 
 resource "aws_iam_role" "this" {
-  name = var.name
-  path = "/"
+  name        = var.name
+  path        = "/"
+  description = "irsa iam_role for ${var.name}"
 
   # Maximum CLI/API session duration in seconds between 3600 and 43200"
   max_session_duration = 3600
@@ -10,7 +11,7 @@ resource "aws_iam_role" "this" {
   force_detach_policies = false
   permissions_boundary  = ""
 
-  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.this.json
 
   tags = merge(
     {
@@ -20,7 +21,7 @@ resource "aws_iam_role" "this" {
   )
 }
 
-data "aws_iam_policy_document" "assume_role_policy" {
+data "aws_iam_policy_document" "this" {
   statement {
     effect = "Allow"
 

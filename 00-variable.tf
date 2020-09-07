@@ -19,4 +19,10 @@ variable "kube_serviceaccount" {
 }
 
 variable "policy_document" {
+  default = ""
+}
+
+variable "policy_arns" {
+  type    = list(string)
+  default = []
 }

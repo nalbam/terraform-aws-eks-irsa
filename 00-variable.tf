@@ -13,9 +13,16 @@ variable "cluster_name" {
 }
 
 variable "kube_namespace" {
+  default = ""
 }
 
 variable "kube_serviceaccount" {
+  default = ""
+}
+
+variable "service_account_arns" {
+  type    = list(string)
+  default = []
 }
 
 variable "policy_document" {

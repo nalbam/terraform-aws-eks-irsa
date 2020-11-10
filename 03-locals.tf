@@ -10,6 +10,13 @@ locals {
 }
 
 locals {
+  service_account_arn = var.kube_namespace != "" ? var.kube_serviceaccount != "" ? "system:serviceaccount:${var.kube_namespace}:${var.kube_serviceaccount}" : "" : ""
+
+  service_account_arns = concat(
+    local.service_account_arn,
+    var.service_account_arns,
+  )
+
   tags = {
     "KubernetesCluster"                         = var.cluster_name
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"

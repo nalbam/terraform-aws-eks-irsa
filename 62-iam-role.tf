@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "this" {
     condition {
       test     = "StringEquals"
       variable = "${local.provider_urn}:sub"
-      values   = ["system:serviceaccount:${var.kube_namespace}:${var.kube_serviceaccount}"]
+      values   = local.service_account_arns
     }
   }
 }

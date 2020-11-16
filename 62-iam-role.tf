@@ -22,37 +22,23 @@ resource "aws_iam_role" "this" {
 }
 
 data "aws_iam_policy_document" "this" {
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    for_each = local.provider_urns
+    content {
+      effect = "Allow"
 
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+      actions = ["sts:AssumeRoleWithWebIdentity"]
 
-    # principals {
-    #   type = "Federated"
-    #   identifiers = [
-    #     "arn:aws:iam::${local.account_id}:oidc-provider/${local.provider_urn}"
-    #   ]
-    # }
-
-    dynamic "principals" {
-      for_each = local.provider_arns
-      content {
-        type        = "Federated"
-        identifiers = [principals.value]
+      principals {
+        type = "Federated"
+        identifiers = [
+          "arn:aws:iam::${local.account_id}:oidc-provider/${statement.value}"
+        ]
       }
-    }
 
-    # condition {
-    #   test     = "StringEquals"
-    #   variable = "${local.provider_urn}:sub"
-    #   values   = local.service_account_arns
-    # }
-
-    dynamic "condition" {
-      for_each = local.provider_urns
-      content {
+      condition {
         test     = "StringEquals"
-        variable = "${condition.value}:sub"
+        variable = "${statement.value}:sub"
         values   = local.service_account_arns
       }
     }

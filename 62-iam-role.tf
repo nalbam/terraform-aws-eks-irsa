@@ -27,18 +27,34 @@ data "aws_iam_policy_document" "this" {
 
     actions = ["sts:AssumeRoleWithWebIdentity"]
 
-    principals {
-      type = "Federated"
+    # principals {
+    #   type = "Federated"
+    #   identifiers = [
+    #     "arn:aws:iam::${local.account_id}:oidc-provider/${local.provider_urn}"
+    #   ]
+    # }
 
-      identifiers = [
-        "arn:aws:iam::${local.account_id}:oidc-provider/${local.provider_urn}"
-      ]
+    dynamic "principals" {
+      for_each = local.provider_arns
+      content {
+        type        = "Federated"
+        identifiers = [principals.value]
+      }
     }
 
-    condition {
-      test     = "StringEquals"
-      variable = "${local.provider_urn}:sub"
-      values   = local.service_account_arns
+    # condition {
+    #   test     = "StringEquals"
+    #   variable = "${local.provider_urn}:sub"
+    #   values   = local.service_account_arns
+    # }
+
+    dynamic "condition" {
+      for_each = local.provider_urns
+      content {
+        test     = "StringEquals"
+        variable = "${condition.value}:sub"
+        values   = local.service_account_arns
+      }
     }
   }
 }

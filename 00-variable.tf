@@ -10,6 +10,12 @@ variable "name" {
 
 variable "cluster_name" {
   description = "Name of the cluster, e.g: eks-demo"
+  default     = ""
+}
+
+variable "cluster_names" {
+  type    = list(string)
+  default = []
 }
 
 variable "kube_namespace" {

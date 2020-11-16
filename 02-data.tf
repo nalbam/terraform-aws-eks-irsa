@@ -4,5 +4,7 @@ data "aws_caller_identity" "current" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = var.cluster_name
+  count = length(local.cluster_names)
+
+  name = local.cluster_names[count.index]
 }

@@ -13,10 +13,10 @@ locals {
     replace(item, "https://", "")
   ]
 
-  provider_arns = [
-    for item in local.provider_urns :
-    "arn:aws:iam::${local.account_id}:oidc-provider/${item}"
-  ]
+  # provider_arns = [
+  #   for item in local.provider_urns :
+  #   "arn:aws:iam::${local.account_id}:oidc-provider/${item}"
+  # ]
 }
 
 locals {

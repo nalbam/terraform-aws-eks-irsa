@@ -3,33 +3,35 @@
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.13 |
+| aws | >= 3.30.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | >= 3.30.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cluster\_name | Name of the cluster, e.g: eks-demo | `string` | `""` | no |
-| cluster\_names | n/a | `list(string)` | `[]` | no |
-| kube\_namespace | n/a | `string` | `""` | no |
-| kube\_serviceaccount | n/a | `string` | `""` | no |
-| name | Name of the role, e.g: eks-demo-role | `any` | n/a | yes |
-| policy\_arns | n/a | `list(string)` | `[]` | no |
-| policy\_document | n/a | `string` | `""` | no |
-| region | The region to deploy the cluster in, e.g: us-east-1 | `any` | n/a | yes |
-| service\_account\_arns | n/a | `list(string)` | `[]` | no |
+| cluster\_info | n/a | `any` | n/a | yes |
+| iam\_policy | n/a | `string` | n/a | yes |
+| iam\_policy\_desc | n/a | `string` | `""` | no |
+| irsa\_name | n/a | `string` | `null` | no |
+| namespace | n/a | `string` | `""` | no |
+| service\_account | n/a | `string` | `""` | no |
+| service\_name | n/a | `string` | n/a | yes |
+| tags | n/a | `map(string)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn | n/a |
-| name | n/a |
+| role\_arn | n/a |
+| role\_name | n/a |
 
 <!--- END_TF_DOCS --->

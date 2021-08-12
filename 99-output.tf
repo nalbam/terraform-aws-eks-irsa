@@ -1,17 +1,9 @@
 # output
 
-output "name" {
-  value = var.name
+output "role_name" {
+  value = aws_iam_role.irsa.name
 }
 
-output "arn" {
-  value = format("arn:aws:iam::%s:role/%s", local.account_id, var.name)
+output "role_arn" {
+  value = aws_iam_role.irsa.arn
 }
-
-# output "provider_urns" {
-#   value = local.provider_urns
-# }
-
-# output "provider_arns" {
-#   value = local.provider_arns
-# }

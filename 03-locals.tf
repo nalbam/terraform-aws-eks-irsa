@@ -5,35 +5,22 @@ locals {
 }
 
 locals {
-  # provider_url = data.aws_eks_cluster.cluster.0.identity.0.oidc.0.issuer
-  # provider_urn = replace(local.provider_url, "https://", "")
+  cluster_group = var.cluster_info.cluster_group
+  cluster_names = var.cluster_info.cluster_names
 
+  name = var.irsa_name != null ? var.irsa_name : format("irsa--%s--%s", local.cluster_group, var.service_name)
+
+  namespace       = var.namespace != "" ? var.namespace : var.service_name
+  service_account = var.service_account != "" ? var.service_account : var.service_name
+
+  service_account_arns = [format("system:serviceaccount:%s:%s", local.namespace, local.service_account)]
+
+  iam_policy_desc = var.iam_policy_desc != "" ? var.iam_policy_desc : "${local.name} policy"
+}
+
+locals {
   provider_urns = [
     for item in data.aws_eks_cluster.cluster.*.identity.0.oidc.0.issuer :
     replace(item, "https://", "")
   ]
-
-  # provider_arns = [
-  #   for item in local.provider_urns :
-  #   "arn:aws:iam::${local.account_id}:oidc-provider/${item}"
-  # ]
-}
-
-locals {
-  cluster_names = compact(concat(
-    [var.cluster_name],
-    var.cluster_names,
-  ))
-
-  service_account_arn = var.kube_namespace != "" ? var.kube_serviceaccount != "" ? "system:serviceaccount:${var.kube_namespace}:${var.kube_serviceaccount}" : "" : ""
-
-  service_account_arns = compact(concat(
-    [local.service_account_arn],
-    var.service_account_arns,
-  ))
-
-  tags = {
-    "KubernetesCluster"                         = var.cluster_name
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-  }
 }

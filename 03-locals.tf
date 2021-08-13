@@ -5,8 +5,8 @@ locals {
 }
 
 locals {
-  cluster_group = var.cluster_info.cluster_group
-  cluster_names = var.cluster_info.cluster_names
+  cluster_group = try(var.cluster_info.cluster_group, var.cluster_name)
+  cluster_names = try(var.cluster_info.cluster_names, [local.cluster_group])
 
   name = var.irsa_name != null ? var.irsa_name : format("irsa--%s--%s", local.cluster_group, var.service_name)
 

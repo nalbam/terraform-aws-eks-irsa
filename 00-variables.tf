@@ -1,6 +1,13 @@
 # variable
 
+variable "cluster_name" {
+  type    = string
+  default = null
+}
+
 variable "cluster_info" {
+  # type    = map(any)
+  default = null
 }
 
 variable "irsa_name" {

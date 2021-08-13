@@ -18,7 +18,8 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cluster\_info | n/a | `any` | n/a | yes |
+| cluster\_info | n/a | `any` | `null` | no |
+| cluster\_name | n/a | `string` | `null` | no |
 | iam\_policy | n/a | `string` | n/a | yes |
 | iam\_policy\_desc | n/a | `string` | `""` | no |
 | irsa\_name | n/a | `string` | `null` | no |

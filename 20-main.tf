@@ -1,30 +1,30 @@
 # main
 
 resource "aws_iam_role" "irsa" {
-  name = local.name
+  name = local.irsa_name
 
   assume_role_policy = data.aws_iam_policy_document.irsa.json
 
   tags = merge(
     var.tags,
     {
-      "Name" = local.name
+      "Name" = local.irsa_name
     },
   )
 }
 
 resource "aws_iam_policy" "irsa" {
-  name        = local.name
-  description = local.iam_policy_desc
+  name        = local.irsa_name
+  description = local.irsa_desc
   policy      = var.iam_policy
 }
 
 resource "aws_iam_role_policy_attachment" "irsa" {
-  policy_arn = aws_iam_policy.irsa.arn
   role       = aws_iam_role.irsa.name
+  policy_arn = aws_iam_policy.irsa.arn
 
   depends_on = [
+    aws_iam_role.irsa,
     aws_iam_policy.irsa,
-    aws_iam_role.irsa
   ]
 }

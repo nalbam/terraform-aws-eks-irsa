@@ -1,18 +1,21 @@
 # variable
 
 variable "cluster_name" {
-  type    = string
-  default = null
+  type = string
 }
 
-variable "cluster_info" {
-  # type    = map(any)
-  default = null
+variable "provider_url" {
+  type = string
 }
 
 variable "irsa_name" {
   type    = string
-  default = null
+  default = ""
+}
+
+variable "irsa_desc" {
+  type    = string
+  default = ""
 }
 
 variable "service_name" {
@@ -31,11 +34,6 @@ variable "service_account" {
 
 variable "iam_policy" {
   type = string
-}
-
-variable "iam_policy_desc" {
-  type    = string
-  default = ""
 }
 
 variable "tags" {

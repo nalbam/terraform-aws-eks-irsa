@@ -18,12 +18,12 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cluster\_info | n/a | `any` | `null` | no |
-| cluster\_name | n/a | `string` | `null` | no |
+| cluster\_name | n/a | `string` | n/a | yes |
 | iam\_policy | n/a | `string` | n/a | yes |
-| iam\_policy\_desc | n/a | `string` | `""` | no |
-| irsa\_name | n/a | `string` | `null` | no |
+| irsa\_desc | n/a | `string` | `""` | no |
+| irsa\_name | n/a | `string` | `""` | no |
 | namespace | n/a | `string` | `""` | no |
+| provider\_url | n/a | `string` | n/a | yes |
 | service\_account | n/a | `string` | `""` | no |
 | service\_name | n/a | `string` | n/a | yes |
 | tags | n/a | `map(string)` | `{}` | no |

@@ -8,14 +8,14 @@
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.13 |
-| aws | >= 3.30.0 |
+| terraform | >= 1.1 |
+| aws | >= 4.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.30.0 |
+| aws | >= 4.1.0 |
 
 ## Inputs
 

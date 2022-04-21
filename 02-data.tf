@@ -3,23 +3,32 @@
 data "aws_caller_identity" "current" {
 }
 
+data "aws_eks_cluster" "cluster" {
+  count = length(local.cluster_names)
+
+  name = local.cluster_names[count.index]
+}
+
 data "aws_iam_policy_document" "irsa" {
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    for_each = local.provider_urns
+    content {
+      effect = "Allow"
 
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+      actions = ["sts:AssumeRoleWithWebIdentity"]
 
-    principals {
-      type = "Federated"
-      identifiers = [
-        "arn:aws:iam::${local.account_id}:oidc-provider/${var.provider_url}"
-      ]
-    }
+      principals {
+        type = "Federated"
+        identifiers = [
+          format("arn:aws:iam::%s:oidc-provider/%s", local.account_id, statement.value)
+        ]
+      }
 
-    condition {
-      test     = "StringEquals"
-      variable = "${var.provider_url}:sub"
-      values   = local.service_account_arns
+      condition {
+        test     = "StringEquals"
+        variable = format("%s:sub", statement.value)
+        values   = local.service_account_arns
+      }
     }
   }
 }

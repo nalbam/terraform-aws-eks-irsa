@@ -2,7 +2,7 @@
 
 variable "cluster_name" {
   type    = string
-  default = null
+  default = ""
 }
 
 variable "cluster_group" {
@@ -27,12 +27,12 @@ variable "service_name" {
 
 variable "namespace" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "service_account" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "iam_policy" {
@@ -42,7 +42,7 @@ variable "iam_policy" {
 
 variable "iam_policy_desc" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "tags" {

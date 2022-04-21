@@ -21,7 +21,8 @@ variable "irsa_name" {
 }
 
 variable "service_name" {
-  type = string
+  description = "Required"
+  type        = string
 }
 
 variable "namespace" {
@@ -35,7 +36,8 @@ variable "service_account" {
 }
 
 variable "iam_policy" {
-  type = string
+  description = "Required"
+  type        = string
 }
 
 variable "iam_policy_desc" {

@@ -1,39 +1,48 @@
 # variable
 
 variable "cluster_name" {
-  type = string
+  type    = string
+  default = ""
 }
 
-variable "provider_url" {
-  type = string
+variable "cluster_group" {
+  type    = string
+  default = null
+}
+
+variable "cluster_names" {
+  type    = list(string)
+  default = null
 }
 
 variable "irsa_name" {
   type    = string
-  default = ""
-}
-
-variable "irsa_desc" {
-  type    = string
-  default = ""
+  default = null
 }
 
 variable "service_name" {
-  type = string
+  description = "Required"
+  type        = string
 }
 
 variable "namespace" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "service_account" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "iam_policy" {
-  type = string
+  description = "Required"
+  type        = string
+}
+
+variable "iam_policy_desc" {
+  type    = string
+  default = null
 }
 
 variable "tags" {

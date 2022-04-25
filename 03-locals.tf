@@ -6,7 +6,7 @@ locals {
 
 locals {
   cluster_group = var.cluster_group != null ? var.cluster_group : var.cluster_name
-  cluster_names = var.cluster_names != null ? var.cluster_names : []
+  cluster_names = var.cluster_names != null ? var.cluster_names : [var.cluster_name]
 
   name = var.irsa_name != null ? var.irsa_name : format("irsa--%s--%s", local.cluster_group, var.service_name)
 

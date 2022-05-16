@@ -21,15 +21,14 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cluster\_group | n/a | `string` | `null` | no |
 | cluster\_name | n/a | `string` | `""` | no |
-| cluster\_names | n/a | `list(string)` | `null` | no |
+| cluster\_oidc\_urls | Required | `list(string)` | n/a | yes |
 | iam\_policy | Required | `string` | n/a | yes |
 | iam\_policy\_desc | n/a | `string` | `null` | no |
 | irsa\_name | n/a | `string` | `null` | no |
 | namespace | n/a | `string` | `null` | no |
 | service\_account | n/a | `string` | `null` | no |
-| service\_name | Required | `string` | n/a | yes |
+| service\_name | n/a | `string` | `""` | no |
 | tags | n/a | `map(string)` | `{}` | no |
 
 ## Outputs

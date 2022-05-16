@@ -3,15 +3,9 @@
 data "aws_caller_identity" "current" {
 }
 
-data "aws_eks_cluster" "cluster" {
-  count = length(local.cluster_names)
-
-  name = local.cluster_names[count.index]
-}
-
 data "aws_iam_policy_document" "irsa" {
   dynamic "statement" {
-    for_each = local.provider_urns
+    for_each = var.cluster_oidc_urls
     content {
       effect = "Allow"
 
@@ -27,7 +21,9 @@ data "aws_iam_policy_document" "irsa" {
       condition {
         test     = "StringEquals"
         variable = format("%s:sub", statement.value)
-        values   = local.service_account_arns
+        values = [
+          format("system:serviceaccount:%s:%s", local.namespace, local.service_account)
+        ]
       }
     }
   }

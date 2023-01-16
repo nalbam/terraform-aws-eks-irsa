@@ -1,6 +1,6 @@
 # terraform-aws-eks-irsa
 
-[![build](https://img.shields.io/github/workflow/status/nalbam/terraform-aws-eks-irsa/build?label=build&style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-eks-irsa/actions/workflows/push.yaml)
+[![build](https://img.shields.io/github/actions/workflow/status/nalbam/terraform-aws-eks-irsa/push.yml?branch=main&style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-eks-irsa/actions/workflows/push.yml)
 [![release](https://img.shields.io/github/v/release/nalbam/terraform-aws-eks-irsa?style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-eks-irsa/releases)
 
 <!--- BEGIN_TF_DOCS --->
